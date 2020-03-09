@@ -1,0 +1,21 @@
+{
+    "/res/excel/宠物.xlsx": [
+        {
+            "sheetName": "pet",
+            "excel": "/res/excel/宠物.xlsx",
+            "type": "table",
+            "key": "id"
+        },
+        {
+            "sheetName": "petColor",
+            "excel": "/res/excel/宠物.xlsx",
+            "type": "table",
+            "key": "id"
+        },
+        {
+            "sheetName": "petConfig",
+            "excel": "/res/excel/宠物.xlsx",
+            "type": "config"
+        }
+    ]
+}
