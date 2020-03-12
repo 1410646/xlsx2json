@@ -65,3 +65,40 @@ export class TsParser extends IParser {
         return interfaceName + ".ts";
     }
 }
+
+export class CSharpParser extends IParser {
+    protected getInterfaceTempStr(): string {
+        return "class {interfaceName} {\n{body}}"
+    }
+
+    protected getInterfacePropStr(): string {
+        return "\tpublic {typeName} {propName};\n";
+    }
+
+    protected getInterfaceType(excelType: string): string {
+        if (excelType == "int") {
+            return "int";
+        }
+        if(excelType == "float"){
+            return "float";
+        }
+        if (excelType == "int[]") {
+            return "int[]";
+        }
+        if(excelType == "float[]"){
+            return "float[]";
+        }
+        if (excelType == "string") {
+            return "string";
+        }
+        if (excelType == "string[]") {
+            return "string[]";
+        }
+        console.error("excel 数据类型解析错误");
+        throw new Error("excel 数据类型解析错误");
+    }
+
+    public getInterfaceFileName(interfaceName: string): string {
+        return interfaceName + ".ts";
+    }
+}
