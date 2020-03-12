@@ -53,6 +53,9 @@ export interface ExportSheetConfig {
     key: string;
 }
 
+export let xlsxRootPath:string;
+export let outJsonRoot:string;
+export let outInterfaceRoot:string;
 (async function main() {
     // let parser = new TsParseTypePerformance;
     // let data = new ExportExcelData;
@@ -61,6 +64,9 @@ export interface ExportSheetConfig {
     // let e = new ExportExcel(data, parser);
     // e.loadExcel();
 
+    xlsxRootPath = process.cwd() + "/res/excel/";
+    outJsonRoot = process.cwd() + "/out/json/";
+    outInterfaceRoot = process.cwd() + "/out/codeInterfaces/";
     ExportTool.parser = new TsParser;
     let exportTool = new ExportTool(process.cwd() + "/res/config/export.json");
     await exportTool.initConfig();

@@ -99,6 +99,6 @@ export class CSharpParser extends IParser {
     }
 
     public getInterfaceFileName(interfaceName: string): string {
-        return interfaceName + ".ts";
+        return interfaceName + ".cs";
     }
 }

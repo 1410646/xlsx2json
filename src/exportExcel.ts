@@ -2,7 +2,7 @@ import * as xlsx from 'xlsx';
 let process: NodeJS.Process = require('process');
 import * as fs from 'fs';
 import ExportSheet, { ExportSheetData } from './exportSheet';
-import { ExportSheetConfig } from './exportTool';
+import { ExportSheetConfig, xlsxRootPath } from './exportTool';
 
 export class ExportExcelData {
     excel: string;//excel表路径
@@ -14,7 +14,7 @@ export class ExportExcelData {
     }
 
     public static async parseExcelData(excelPath: string, sheetConfigs: ExportSheetConfig[]): Promise<ExportExcelData> {
-        var realPath = process.cwd() + excelPath;
+        var realPath = xlsxRootPath + excelPath + ".xlsx";
         let isExist = await fs.existsSync(realPath);
         if (!isExist) {
             console.error(excelPath + " 文件不存在!");

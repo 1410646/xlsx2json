@@ -1,20 +1,20 @@
 {
-    "/res/excel/宠物.xlsx": [
+    "宠物": [
         {
             "sheetName": "pet",
-            "excel": "/res/excel/宠物.xlsx",
+            "excel": "宠物",
             "type": "table",
             "key": "id"
         },
         {
             "sheetName": "petColor",
-            "excel": "/res/excel/宠物.xlsx",
+            "excel": "宠物",
             "type": "table",
             "key": "id"
         },
         {
             "sheetName": "petConfig",
-            "excel": "/res/excel/宠物.xlsx",
+            "excel": "宠物",
             "type": "config"
         }
     ]

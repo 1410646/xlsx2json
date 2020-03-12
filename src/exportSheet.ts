@@ -1,6 +1,6 @@
 import * as xlsx from 'xlsx';
 import * as fs from 'fs';
-import ExportTool from './exportTool';
+import ExportTool, { outJsonRoot, outInterfaceRoot } from './exportTool';
 
 export default class ExportSheet {
     private _sheetData: ExportSheetData;
@@ -27,30 +27,28 @@ export default class ExportSheet {
 
     private async parseSheetAsTable(sheet: xlsx.WorkSheet, sheetName: string) {
         let obj = xlsx.utils.sheet_to_json<any>(sheet, { header: 0 });//转出来的json 0元素是excel第二行 类型，1元素是excel第三行 说明
-        let rootPath = process.cwd();
         let types = obj[0];
         let realData = this.getTableRealJsonData(obj.slice(2), types);
-        fs.writeFileSync(rootPath + "/out/json/" + sheetName + ".json", realData);
+        fs.writeFileSync(outJsonRoot + sheetName + ".json", realData);
 
         let interfaceName = this.getInterfaceName(sheetName);
         let codeFileStr = ExportTool.parser.parseTableTypes(types, interfaceName);
         let fileName = ExportTool.parser.getInterfaceFileName(interfaceName);
-        fs.writeFileSync(rootPath + "/out/codeInterfaces/" + fileName, codeFileStr);
+        fs.writeFileSync(outInterfaceRoot + fileName, codeFileStr);
     }
 
     private parseSheetAsConfig(sheet: xlsx.WorkSheet, sheetName: string) {
         let obj = xlsx.utils.sheet_to_json<any>(sheet, { header: "A" });//转出来的json 0元素是excel第二行 类型，1元素是excel第三行 说明
-        let rootPath = process.cwd();
 
         //导出config数据
         let resultJsonData = this.getConfigRealJsonData(obj);
-        fs.writeFileSync(rootPath + "/out/json/" + sheetName + ".json", resultJsonData);
+        fs.writeFileSync(outJsonRoot + sheetName + ".json", resultJsonData);
 
         //导出类型
         let interfaceName = this.getInterfaceName(sheetName);
         let codeFileStr = ExportTool.parser.parseConfigTypes(obj, interfaceName);
         let fileName = ExportTool.parser.getInterfaceFileName(interfaceName);
-        fs.writeFileSync(rootPath + "/out/codeInterfaces/" + fileName, codeFileStr);
+        fs.writeFileSync(outInterfaceRoot + fileName, codeFileStr);
     }
 
     private getTableRealJsonData(originData: any[], types: any) {
